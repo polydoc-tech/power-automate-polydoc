@@ -1,0 +1,10 @@
+{
+  "source": "<!doctype html><html><head><meta charset=\"utf-8\"><style>body{font-family:Segoe UI,Arial,sans-serif;color:#2b2b2b;margin:0;padding:40px}h1{color:#da3b01;margin:0 0 4px}.sub{color:#777;margin:0 0 28px}table{width:100%;border-collapse:collapse;margin-top:8px}th,td{text-align:left;padding:10px 12px;border-bottom:1px solid #eee}th{background:#fafafa;color:#555;font-size:12px;text-transform:uppercase;letter-spacing:.04em}tfoot td{font-weight:700;border-top:2px solid #da3b01}.right{text-align:right}.bars{margin:24px 0}.bar{height:14px;background:#da3b01;border-radius:7px;margin:6px 0}</style></head><body><h1>Acme Group</h1><p class=\"sub\">Quarterly portfolio report &middot; Q2 2026</p><div class=\"bars\"><div class=\"bar\" style=\"width:82%\"></div><div class=\"bar\" style=\"width:64%\"></div><div class=\"bar\" style=\"width:91%\"></div></div><table><thead><tr><th>Holding</th><th class=\"right\">Allocation</th><th class=\"right\">Return</th></tr></thead><tbody><tr><td>Equities</td><td class=\"right\">48%</td><td class=\"right\">+9.2%</td></tr><tr><td>Fixed income</td><td class=\"right\">31%</td><td class=\"right\">+3.1%</td></tr><tr><td>Alternatives</td><td class=\"right\">21%</td><td class=\"right\">+6.7%</td></tr></tbody><tfoot><tr><td>Total</td><td class=\"right\">100%</td><td class=\"right\">+6.8%</td></tr></tfoot></table></body></html>",
+  "filename": "acme-portfolio-report.pdf",
+  "tag": "pa-pdf-demo",
+  "layout": {
+    "format": "A4",
+    "printBackground": true,
+    "margin": { "top": "16mm", "right": "16mm", "bottom": "16mm", "left": "16mm" }
+  }
+}

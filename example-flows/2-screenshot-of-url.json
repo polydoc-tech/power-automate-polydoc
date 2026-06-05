@@ -1,0 +1,10 @@
+{
+  "source": "https://example.com",
+  "filename": "example-com.png",
+  "tag": "pa-screenshot-demo",
+  "screenshot": {
+    "type": "png",
+    "fullPage": true,
+    "viewport": { "width": 1280, "height": 800 }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "source": "<!doctype html><html><head><meta charset=\"utf-8\"><style>body{font-family:Segoe UI,Arial,sans-serif;color:#2b2b2b;margin:0;padding:40px}h1{color:#da3b01;margin:0}.muted{color:#777}.row{display:flex;justify-content:space-between;margin-top:24px}table{width:100%;border-collapse:collapse;margin-top:24px}th,td{padding:8px 10px;border-bottom:1px solid #eee;text-align:left}th{font-size:12px;text-transform:uppercase;color:#555}.right{text-align:right}.totals{margin-top:16px;width:280px;float:right}.totals td{border:none;padding:4px 10px}.grand{font-weight:700;border-top:2px solid #da3b01}</style></head><body><h1>Invoice INV-2026-001</h1><p class=\"muted\">Issued 2026-06-05 &nbsp;|&nbsp; Due 2026-07-05</p><div class=\"row\"><div><strong>Northwind Studio GmbH</strong><br>Hauptstrasse 1<br>10115 Berlin, DE<br>VAT: DE123456789</div><div><strong>Bill to</strong><br>Contoso SARL<br>10 Rue de Rivoli<br>75001 Paris, FR</div></div><table><thead><tr><th>Description</th><th class=\"right\">Qty</th><th class=\"right\">Unit price</th><th class=\"right\">Line total</th></tr></thead><tbody><tr><td>Design retainer</td><td class=\"right\">2</td><td class=\"right\">100.00</td><td class=\"right\">200.00</td></tr></tbody></table><table class=\"totals\"><tr><td>Net</td><td class=\"right\">200.00 EUR</td></tr><tr><td>VAT 19%</td><td class=\"right\">38.00 EUR</td></tr><tr class=\"grand\"><td>Total</td><td class=\"right\">238.00 EUR</td></tr></table><div style=\"clear:both\"></div><p class=\"muted\" style=\"margin-top:40px\">Payment terms: Net 30. IBAN DE89 3704 0044 0532 0130 00.</p></body></html>",
+  "filename": "northwind-INV-2026-001.pdf",
+  "tag": "pa-einvoice-demo",
+  "eInvoice": {
+    "standard": "zugferd",
+    "profile": "en16931",
+    "verify": true,
+    "invoice": {
+      "number": "INV-2026-001",
+      "issueDate": "2026-06-05",
+      "dueDate": "2026-07-05",
+      "currencyCode": "EUR",
+      "seller": {
+        "name": "Northwind Studio GmbH",
+        "address": { "line1": "Hauptstrasse 1", "city": "Berlin", "postalCode": "10115", "countryCode": "DE" },
+        "taxId": "DE123456789",
+        "email": "billing@northwind.example"
+      },
+      "buyer": {
+        "name": "Contoso SARL",
+        "address": { "line1": "10 Rue de Rivoli", "city": "Paris", "postalCode": "75001", "countryCode": "FR" }
+      },
+      "lines": [
+        {
+          "description": "Design retainer",
+          "quantity": 2,
+          "unitCode": "C62",
+          "unitPrice": 100,
+          "lineTotal": 200,
+          "vatRate": 19,
+          "vatCategoryCode": "S"
+        }
+      ],
+      "taxSummary": [
+        { "categoryCode": "S", "rate": 19, "taxableAmount": 200, "taxAmount": 38 }
+      ],
+      "paymentTerms": "Net 30",
+      "paymentMeans": {
+        "typeCode": "30",
+        "iban": "DE89370400440532013000",
+        "bic": "COBADEFFXXX",
+        "accountName": "Northwind Studio GmbH"
+      },
+      "totalNetAmount": 200,
+      "totalTaxAmount": 38,
+      "totalGrossAmount": 238
+    }
+  }
+}
