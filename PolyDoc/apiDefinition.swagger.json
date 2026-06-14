@@ -53,6 +53,10 @@
             "description": "Missing or invalid API key.",
             "schema": { "$ref": "#/definitions/ErrorResponse" }
           },
+          "402": {
+            "description": "Monthly conversion quota exhausted. Upgrade the plan or wait for the next billing period.",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
           "403": {
             "description": "The account is disabled.",
             "schema": { "$ref": "#/definitions/ErrorResponse" }
@@ -99,6 +103,10 @@
           },
           "401": {
             "description": "Missing or invalid API key.",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "402": {
+            "description": "Monthly conversion quota exhausted. Upgrade the plan or wait for the next billing period.",
             "schema": { "$ref": "#/definitions/ErrorResponse" }
           },
           "403": {
