@@ -432,7 +432,7 @@
             "verify": { "type": "boolean", "x-ms-summary": "Verify compliance" }
           }
         },
-        "ua": {
+        "pdfua": {
           "type": "object",
           "description": "Produce an accessible tagged PDF targeting PDF/UA-1. Cannot be combined with PDF/A or e-invoice.",
           "x-ms-summary": "PDF/UA",
