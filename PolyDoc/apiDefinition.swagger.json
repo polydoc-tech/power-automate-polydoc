@@ -431,6 +431,14 @@
             "level": { "type": "string", "enum": ["1b", "2b", "3b"], "x-ms-summary": "Level" },
             "verify": { "type": "boolean", "x-ms-summary": "Verify compliance" }
           }
+        },
+        "ua": {
+          "type": "object",
+          "description": "Produce an accessible tagged PDF targeting PDF/UA-1. Cannot be combined with PDF/A or e-invoice.",
+          "x-ms-summary": "PDF/UA",
+          "properties": {
+            "verify": { "type": "boolean", "description": "Validate against veraPDF PDF/UA-1; returns an error if validation fails.", "x-ms-summary": "Verify compliance" }
+          }
         }
       }
     },
