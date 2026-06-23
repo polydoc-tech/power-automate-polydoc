@@ -10,6 +10,20 @@
       "email": "hello@polydoc.tech"
     }
   },
+  "x-ms-connector-metadata": [
+    {
+      "propertyName": "Website",
+      "propertyValue": "https://polydoc.tech"
+    },
+    {
+      "propertyName": "Privacy policy",
+      "propertyValue": "https://polydoc.tech/legal/privacy-policy/"
+    },
+    {
+      "propertyName": "Categories",
+      "propertyValue": "Content and Files"
+    }
+  ],
   "host": "api.polydoc.tech",
   "basePath": "/",
   "schemes": ["https"],
