@@ -9,3 +9,8 @@ smoke-out/
 # OS / editor cruft
 .DS_Store
 Thumbs.db
+
+# Internal working docs (roadmap, PR comment drafts) - not part of the submission
+SUBMISSION.md
+PR-COMMENT-DRAFT.md
+PR-COMMENT-2.md

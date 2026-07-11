@@ -1,9 +1,9 @@
 {
-  "connectorId": "shared_polydoc-20-28independent-20publisher-29-5fe90c6-df19e27a38e78b61",
+  "connectorId": "shared_polydoc-5fe90c6471beb742dd-5ff793cb697ce89943",
   "environment": "Default-879b76bf-6137-4078-9740-64b497de3840",
   "apiProperties": "apiProperties.json",
   "apiDefinition": "apiDefinition.swagger.json",
   "icon": "icon.png",
-  "powerAppsApiVersion": "2016-11-01",
-  "powerAppsUrl": "https://api.powerapps.com"
+  "powerAppsUrl": "https://api.powerapps.com",
+  "powerAppsApiVersion": "2016-11-01"
 }
