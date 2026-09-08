@@ -1,6 +1,7 @@
 # power-automate-polydoc
 
-A Microsoft Power Platform **custom connector** for [PolyDoc](https://polydoc.tech):
+A Microsoft Power Platform **certified independent publisher connector** for
+[PolyDoc](https://polydoc.tech):
 HTML/URL to PDF, screenshots, and EU hybrid e-invoices (ZUGFeRD / Factur-X).
 This is the Power Automate / Power Apps / Copilot Studio counterpart of the
 published [`n8n-nodes-polydoc`](https://www.npmjs.com/package/n8n-nodes-polydoc)
@@ -21,6 +22,7 @@ PolyDoc/
   icon.png                     connector icon (PolyDoc mark on the brand color)
   icon.svg                     icon source
   README.md                    connector README (ships with the IP submission)
+  intro.md                     connector intro (ships with the IP submission)
 example-flows/                 the three use-case bodies (PDF / screenshot / e-invoice)
 ```
 
@@ -43,12 +45,12 @@ Each connection collects only the PolyDoc API key (a `securestring` connection
 parameter). A `setheader` policy in `apiProperties.json` builds the
 `Authorization: Bearer <key>` header, so users never type the `Bearer ` prefix.
 
-> The policy-based auth is verified by schema (`paconn validate`). Its runtime
-> behavior can only be confirmed by creating a real connection in a tenant,
-> which is part of the live-import follow-up below. If certification surfaces a
-> problem with the per-connection policy reference, the fallback is a plain
-> `apiKey` security definition on the `Authorization` header where the user
-> pastes `Bearer <key>`.
+> The policy is verified by schema (`paconn validate`) and at runtime: both
+> operations returned 200 from a tenant import with only the API key in the
+> connection. It has not been re-verified on the certified connector, which is
+> a separate deployment of the same definition. If that surfaces a problem with
+> the per-connection policy reference, the fallback is a plain `apiKey` security
+> definition on the `Authorization` header where the user pastes `Bearer <key>`.
 
 ## Validate
 
@@ -63,16 +65,27 @@ paconn validate --api-def PolyDoc/apiDefinition.swagger.json
 See `example-flows/README.md` for `curl` commands that exercise each body
 against the live API in sandbox mode.
 
-## Status and follow-ups
+## Status
 
-Done: connector definition, properties, icon, READMEs, and three example bodies,
-validated and smoke-tested against the live API in sandbox.
+Certified and merged. The connector is published in
+[microsoft/PowerPlatformConnectors](https://github.com/microsoft/PowerPlatformConnectors/tree/dev/independent-publisher-connectors/PolyDoc)
+under `independent-publisher-connectors/PolyDoc/`.
 
-Not done yet (tracked as follow-ups):
+- Definition, properties, icon, READMEs and the three example bodies validated
+  and smoke-tested against the live API in sandbox mode.
+- Imported into a Power Automate tenant; both operations and the e-invoice mode
+  of **Convert to PDF** returned 200, with operation screenshots captured.
+- Independent Publisher submission
+  [#4222](https://github.com/microsoft/PowerPlatformConnectors/pull/4222):
+  OneVet verification completed 2026-08-10, certification approved 2026-08-14,
+  merged 2026-09-08.
 
-- Live import into a Power Automate environment, create a connection, run all
-  three operations, and capture screenshots.
-- Independent Publisher submission PR to `microsoft/PowerPlatformConnectors`
-  (PR titled "PolyDoc (Independent Publisher)"; the README must include
-  screenshots of three operations succeeding in flows).
-- Create the GitHub repository under the `polydoc-tech` org and push.
+Remaining: Microsoft's production deployment, which it puts at three to four
+weeks from approval and rolls out by region. Until it lands, the connector is
+not selectable in Power Automate and
+`learn.microsoft.com/en-us/connectors/polydocip/` returns 404.
+
+`package.zip` (the solution-export artifact the certification process requires)
+is committed upstream but deliberately not committed here: it is a build
+artifact, rebuilt with the `pac` recipe in `SUBMISSION.md` and structurally
+checked with `scripts/validate_package.py`.
