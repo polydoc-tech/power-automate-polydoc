@@ -505,7 +505,8 @@
         "totalTaxAmount": { "type": "number", "x-ms-summary": "Total tax" },
         "totalGrossAmount": { "type": "number", "description": "Must equal net + tax.", "x-ms-summary": "Total gross" },
         "note": { "type": "string", "x-ms-summary": "Note" },
-        "buyerReference": { "type": "string", "description": "Buyer reference / Leitweg-ID for public-sector invoices.", "x-ms-summary": "Buyer reference" }
+        "buyerReference": { "type": "string", "description": "Buyer reference / Leitweg-ID for public-sector invoices.", "x-ms-summary": "Buyer reference" },
+        "orderReference": { "type": "string", "description": "Purchase order number (BT-13).", "x-ms-summary": "Order reference" }
       }
     },
     "Party": {
