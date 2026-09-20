@@ -12,9 +12,9 @@ PolyDoc
 ## Prerequisites
 
 You need a PolyDoc account and an API key. The free tier is enough to evaluate
-the connector. Custom connectors are a premium Power Automate feature, so flows
-that use this connector need a Power Automate Premium plan (per-user or
-per-flow), the same as the built-in HTTP action.
+the connector. Certified independent publisher connectors are premium
+connectors, so flows that use this connector need a Power Automate Premium plan
+(per-user or per-flow).
 
 ## Obtaining credentials
 
