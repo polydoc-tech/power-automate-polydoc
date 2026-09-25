@@ -494,9 +494,11 @@
         "number": { "type": "string", "x-ms-summary": "Invoice number" },
         "issueDate": { "type": "string", "description": "Issue date, YYYY-MM-DD.", "x-ms-summary": "Issue date" },
         "dueDate": { "type": "string", "description": "Due date, YYYY-MM-DD. Provide this or Payment terms (EN 16931 rule BR-CO-25).", "x-ms-summary": "Due date" },
+        "deliveryDate": { "type": "string", "description": "Actual delivery date (BT-72), YYYY-MM-DD. Reaches the XML at every profile. When empty, the issue date is written as the delivery date.", "x-ms-summary": "Delivery date" },
         "currencyCode": { "type": "string", "description": "ISO 4217 currency code, e.g. EUR.", "x-ms-summary": "Currency" },
         "seller": { "$ref": "#/definitions/Party" },
         "buyer": { "$ref": "#/definitions/Party" },
+        "deliverTo": { "$ref": "#/definitions/DeliverTo" },
         "lines": { "type": "array", "items": { "$ref": "#/definitions/InvoiceLine" }, "x-ms-summary": "Lines" },
         "taxSummary": { "type": "array", "items": { "$ref": "#/definitions/TaxSummary" }, "x-ms-summary": "Tax summary" },
         "paymentTerms": { "type": "string", "description": "Free-text payment terms. Provide this or Due date.", "x-ms-summary": "Payment terms" },
@@ -541,6 +543,26 @@
         "city": { "type": "string", "x-ms-summary": "City" },
         "postalCode": { "type": "string", "x-ms-summary": "Postal code" },
         "countryCode": { "type": "string", "description": "ISO 3166-1 alpha-2 country code, e.g. DE.", "x-ms-summary": "Country code" }
+      }
+    },
+    "DeliverTo": {
+      "type": "object",
+      "description": "Where the goods or services are delivered, when that differs from the buyer (BG-13). Reaches the XML at every profile. Leave it empty to write nothing.",
+      "properties": {
+        "name": { "type": "string", "description": "Deliver-to party name (BT-70).", "x-ms-summary": "Deliver-to name" },
+        "address": { "$ref": "#/definitions/DeliveryAddress" }
+      }
+    },
+    "DeliveryAddress": {
+      "type": "object",
+      "description": "Deliver-to address (BG-15). Only the country code is required (EN 16931 rule BR-57).",
+      "required": ["countryCode"],
+      "properties": {
+        "line1": { "type": "string", "description": "Street and house number (BT-75).", "x-ms-summary": "Deliver-to address line 1" },
+        "line2": { "type": "string", "description": "Additional address line (BT-76).", "x-ms-summary": "Deliver-to address line 2" },
+        "city": { "type": "string", "description": "City (BT-77).", "x-ms-summary": "Deliver-to city" },
+        "postalCode": { "type": "string", "description": "Postal or ZIP code (BT-78).", "x-ms-summary": "Deliver-to postal code" },
+        "countryCode": { "type": "string", "description": "ISO 3166-1 alpha-2 country code (BT-80), e.g. DE. Required whenever any deliver-to address field is sent.", "x-ms-summary": "Deliver-to country code" }
       }
     },
     "InvoiceLine": {
