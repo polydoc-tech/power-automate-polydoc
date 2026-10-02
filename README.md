@@ -18,7 +18,6 @@ It targets the Microsoft **Independent Publisher** program, so the layout under
 PolyDoc/
   apiDefinition.swagger.json   OpenAPI 2.0 - the connector operations and body schemas
   apiProperties.json           auth (API key + Bearer policy), brand color, publisher
-  settings.json                paconn settings (connectorId/environment filled at deploy time)
   icon.png                     connector icon (PolyDoc mark on the brand color)
   icon.svg                     icon source
   README.md                    connector README (ships with the IP submission)

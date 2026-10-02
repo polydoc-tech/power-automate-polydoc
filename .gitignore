@@ -9,3 +9,6 @@ smoke-out/
 # OS / editor cruft
 .DS_Store
 Thumbs.db
+
+# paconn's local settings (connector id and environment of the deploying account)
+PolyDoc/settings.json
