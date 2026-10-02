@@ -10,7 +10,5 @@ smoke-out/
 .DS_Store
 Thumbs.db
 
-# Internal working docs (roadmap, PR comment drafts) - not part of the submission
-SUBMISSION.md
-PR-COMMENT-DRAFT.md
-PR-COMMENT-2.md
+# paconn's local settings (connector id and environment of the deploying account)
+PolyDoc/settings.json

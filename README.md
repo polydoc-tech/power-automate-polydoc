@@ -18,7 +18,6 @@ It targets the Microsoft **Independent Publisher** program, so the layout under
 PolyDoc/
   apiDefinition.swagger.json   OpenAPI 2.0 - the connector operations and body schemas
   apiProperties.json           auth (API key + Bearer policy), brand color, publisher
-  settings.json                paconn settings (connectorId/environment filled at deploy time)
   icon.png                     connector icon (PolyDoc mark on the brand color)
   icon.svg                     icon source
   README.md                    connector README (ships with the IP submission)
@@ -87,5 +86,5 @@ not selectable in Power Automate and
 
 `package.zip` (the solution-export artifact the certification process requires)
 is committed upstream but deliberately not committed here: it is a build
-artifact, rebuilt with the `pac` recipe in `SUBMISSION.md` and structurally
+artifact, rebuilt with the Power Platform CLI (`pac`) and structurally
 checked with `scripts/validate_package.py`.
