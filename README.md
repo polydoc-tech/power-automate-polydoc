@@ -5,7 +5,7 @@ A Microsoft Power Platform **certified independent publisher connector** for
 HTML/URL to PDF, screenshots, and EU hybrid e-invoices (ZUGFeRD / Factur-X).
 This is the Power Automate / Power Apps / Copilot Studio counterpart of the
 published [`n8n-nodes-polydoc`](https://www.npmjs.com/package/n8n-nodes-polydoc)
-node, built from the same product model in `../../CONNECTOR-PLAYBOOK.md`.
+node.
 
 It targets the Microsoft **Independent Publisher** program, so the layout under
 `PolyDoc/` matches the
