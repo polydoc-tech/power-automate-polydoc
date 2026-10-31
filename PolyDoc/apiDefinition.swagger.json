@@ -500,10 +500,12 @@
         "buyer": { "$ref": "#/definitions/Party" },
         "deliverTo": { "$ref": "#/definitions/DeliverTo" },
         "lines": { "type": "array", "items": { "$ref": "#/definitions/InvoiceLine" }, "x-ms-summary": "Lines" },
-        "taxSummary": { "type": "array", "items": { "$ref": "#/definitions/TaxSummary" }, "x-ms-summary": "Tax summary" },
+        "taxSummary": { "type": "array", "items": { "$ref": "#/definitions/TaxSummary" }, "description": "One entry per VAT category and rate. When empty, it is calculated from the lines, grouped by VAT category and rate, with each group's tax rounded once to cents. Send it whenever you calculate the tax yourself, for example rounded per line: Total tax must equal the sum of its tax amounts. Required when the invoice has invoice allowances or invoice charges.", "x-ms-summary": "Tax summary" },
         "paymentTerms": { "type": "string", "description": "Free-text payment terms. Provide this or Due date.", "x-ms-summary": "Payment terms" },
         "paymentMeans": { "$ref": "#/definitions/PaymentMeans" },
-        "totalNetAmount": { "type": "number", "x-ms-summary": "Total net" },
+        "allowances": { "type": "array", "items": { "$ref": "#/definitions/DocumentAllowanceCharge" }, "description": "Allowances on the whole invoice (BG-20), e.g. an early-order discount. Subtract them in Total net. Reach the XML at every profile. Require Tax summary, whose taxable amounts must already include them.", "x-ms-summary": "Invoice allowances" },
+        "charges": { "type": "array", "items": { "$ref": "#/definitions/DocumentAllowanceCharge" }, "description": "Charges on the whole invoice (BG-21), e.g. freight. Add them in Total net. Reach the XML at every profile. Require Tax summary, whose taxable amounts must already include them.", "x-ms-summary": "Invoice charges" },
+        "totalNetAmount": { "type": "number", "description": "Sum of all line totals, minus the invoice allowances, plus the invoice charges (net, before tax). Must match to the cent.", "x-ms-summary": "Total net" },
         "totalTaxAmount": { "type": "number", "x-ms-summary": "Total tax" },
         "totalGrossAmount": { "type": "number", "description": "Must equal net + tax.", "x-ms-summary": "Total gross" },
         "note": { "type": "string", "x-ms-summary": "Note" },
@@ -574,9 +576,37 @@
         "quantity": { "type": "number", "x-ms-summary": "Quantity" },
         "unitCode": { "type": "string", "description": "UN/ECE unit code, e.g. C62 (piece).", "x-ms-summary": "Unit code" },
         "unitPrice": { "type": "number", "x-ms-summary": "Unit price" },
-        "lineTotal": { "type": "number", "x-ms-summary": "Line total" },
+        "lineTotal": { "type": "number", "description": "Quantity times unit price, minus this line's allowances, plus its charges (net, before tax). On a line with allowances or charges, a value more than 0.02 off is refused.", "x-ms-summary": "Line total" },
         "vatRate": { "type": "number", "x-ms-summary": "VAT rate (%)" },
-        "vatCategoryCode": { "type": "string", "description": "VAT category code, e.g. S (standard), Z (zero), E (exempt).", "x-ms-summary": "VAT category" }
+        "vatCategoryCode": { "type": "string", "description": "VAT category code, e.g. S (standard), Z (zero), E (exempt).", "x-ms-summary": "VAT category" },
+        "allowances": { "type": "array", "items": { "$ref": "#/definitions/LineAllowanceCharge" }, "description": "Allowances on this line (BG-27), e.g. a volume discount. Subtract them in Line total. They take the line's own VAT rate and category. Reach the XML at every profile.", "x-ms-summary": "Line allowances" },
+        "charges": { "type": "array", "items": { "$ref": "#/definitions/LineAllowanceCharge" }, "description": "Charges on this line (BG-28), e.g. packaging. Add them in Line total. They take the line's own VAT rate and category. Reach the XML at every profile.", "x-ms-summary": "Line charges" }
+      }
+    },
+    "LineAllowanceCharge": {
+      "type": "object",
+      "description": "An allowance or a charge on one invoice line (BG-27, BG-28).",
+      "required": ["amount"],
+      "properties": {
+        "amount": { "type": "number", "description": "Amount (BT-136 allowance, BT-141 charge). Never negative: the list it sits in says whether it lowers or raises the line total. It is not calculated from Percentage, so send it as well.", "x-ms-summary": "Amount" },
+        "baseAmount": { "type": "number", "description": "Amount the percentage applies to (BT-137 allowance, BT-142 charge), usually quantity times unit price. Reaches the XML with profile EN 16931 or Extended.", "x-ms-summary": "Base amount" },
+        "percentage": { "type": "number", "description": "Percentage of Base amount (BT-138 allowance, BT-143 charge), e.g. 10 for 10 %. Reaches the XML with profile EN 16931 or Extended.", "x-ms-summary": "Percentage" },
+        "reason": { "type": "string", "description": "Why it applies, in words (BT-139 allowance, BT-144 charge), e.g. Volume discount. Provide this or Reason code (EN 16931 rules BR-42, BR-44).", "x-ms-summary": "Reason" },
+        "reasonCode": { "type": "string", "description": "Code for the reason (BT-140 allowance, BT-145 charge): UNTDID 5189 for an allowance, e.g. 95 (discount), UNTDID 7161 for a charge, e.g. FC (freight). Provide this or Reason.", "x-ms-summary": "Reason code" }
+      }
+    },
+    "DocumentAllowanceCharge": {
+      "type": "object",
+      "description": "An allowance or a charge on the whole invoice (BG-20, BG-21).",
+      "required": ["amount", "vatCategoryCode"],
+      "properties": {
+        "amount": { "type": "number", "description": "Amount (BT-92 allowance, BT-99 charge). Never negative: the list it sits in says whether it lowers or raises the total. It is not calculated from Percentage, so send it as well.", "x-ms-summary": "Amount" },
+        "baseAmount": { "type": "number", "description": "Amount the percentage applies to (BT-93 allowance, BT-100 charge).", "x-ms-summary": "Base amount" },
+        "percentage": { "type": "number", "description": "Percentage of Base amount (BT-94 allowance, BT-101 charge), e.g. 10 for 10 %.", "x-ms-summary": "Percentage" },
+        "reason": { "type": "string", "description": "Why it applies, in words (BT-97 allowance, BT-104 charge), e.g. Freight. Provide this or Reason code (EN 16931 rules BR-33, BR-38).", "x-ms-summary": "Reason" },
+        "reasonCode": { "type": "string", "description": "Code for the reason (BT-98 allowance, BT-105 charge): UNTDID 5189 for an allowance, e.g. 95 (discount), UNTDID 7161 for a charge, e.g. FC (freight). Provide this or Reason.", "x-ms-summary": "Reason code" },
+        "vatCategoryCode": { "type": "string", "description": "VAT category it falls under (BT-95 allowance, BT-102 charge), e.g. S (EN 16931 rules BR-32, BR-37).", "x-ms-summary": "VAT category" },
+        "vatRate": { "type": "number", "description": "VAT rate in percent (BT-96 allowance, BT-103 charge), e.g. 19. Required for every category except O (not subject to VAT), where it must be left out.", "x-ms-summary": "VAT rate (%)" }
       }
     },
     "TaxSummary": {
@@ -585,7 +615,7 @@
       "properties": {
         "categoryCode": { "type": "string", "x-ms-summary": "Category code" },
         "rate": { "type": "number", "x-ms-summary": "Rate (%)" },
-        "taxableAmount": { "type": "number", "x-ms-summary": "Taxable amount" },
+        "taxableAmount": { "type": "number", "description": "Net amount this rate applies to, after the invoice allowances and charges of this category.", "x-ms-summary": "Taxable amount" },
         "taxAmount": { "type": "number", "x-ms-summary": "Tax amount" }
       }
     },
