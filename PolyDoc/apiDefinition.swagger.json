@@ -500,7 +500,7 @@
         "buyer": { "$ref": "#/definitions/Party" },
         "deliverTo": { "$ref": "#/definitions/DeliverTo" },
         "lines": { "type": "array", "items": { "$ref": "#/definitions/InvoiceLine" }, "x-ms-summary": "Lines" },
-        "taxSummary": { "type": "array", "items": { "$ref": "#/definitions/TaxSummary" }, "description": "One entry per VAT category and rate. When empty, it is calculated from the lines. Required when the invoice has invoice allowances or invoice charges.", "x-ms-summary": "Tax summary" },
+        "taxSummary": { "type": "array", "items": { "$ref": "#/definitions/TaxSummary" }, "description": "One entry per VAT category and rate. When empty, it is calculated from the lines, grouped by VAT category and rate, with each group's tax rounded once to cents. Send it whenever you calculate the tax yourself, for example rounded per line: Total tax must equal the sum of its tax amounts. Required when the invoice has invoice allowances or invoice charges.", "x-ms-summary": "Tax summary" },
         "paymentTerms": { "type": "string", "description": "Free-text payment terms. Provide this or Due date.", "x-ms-summary": "Payment terms" },
         "paymentMeans": { "$ref": "#/definitions/PaymentMeans" },
         "allowances": { "type": "array", "items": { "$ref": "#/definitions/DocumentAllowanceCharge" }, "description": "Allowances on the whole invoice (BG-20), e.g. an early-order discount. Subtract them in Total net. Reach the XML at every profile. Require Tax summary, whose taxable amounts must already include them.", "x-ms-summary": "Invoice allowances" },
