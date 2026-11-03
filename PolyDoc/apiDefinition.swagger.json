@@ -492,7 +492,7 @@
       "required": ["number", "issueDate", "currencyCode", "seller", "buyer", "lines", "totalNetAmount", "totalTaxAmount", "totalGrossAmount"],
       "properties": {
         "number": { "type": "string", "x-ms-summary": "Invoice number" },
-        "typeCode": { "type": "string", "description": "UNTDID 1001 document type code (BT-3), e.g. 381 for a credit note or 384 for a corrected invoice. When empty, 380 (commercial invoice) is written. A code outside the EN 16931 list is rejected with 422 (rule BR-CL-01). A credit note keeps Unit price positive (rule BR-27). Not the same field as the payment means Type code.", "x-ms-summary": "Document type code" },
+        "typeCode": { "type": "string", "description": "UNTDID 1001 document type code (BT-3), e.g. 381 for a credit note or 384 for a corrected invoice. Leave it out for 380 (commercial invoice); an empty value is rejected with 400. A code outside the EN 16931 list is rejected with 422 (rule BR-CL-01). Unit price must not be negative on a credit note either (rule BR-27). Not the same field as the payment means Type code.", "x-ms-summary": "Document type code" },
         "issueDate": { "type": "string", "description": "Issue date, YYYY-MM-DD.", "x-ms-summary": "Issue date" },
         "dueDate": { "type": "string", "description": "Due date, YYYY-MM-DD. Provide this or Payment terms (EN 16931 rule BR-CO-25).", "x-ms-summary": "Due date" },
         "deliveryDate": { "type": "string", "description": "Actual delivery date (BT-72), YYYY-MM-DD. Reaches the XML at every profile. When empty, the issue date is written as the delivery date.", "x-ms-summary": "Delivery date" },
