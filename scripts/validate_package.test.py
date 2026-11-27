@@ -147,6 +147,11 @@ class ValidatePackage(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         self.assertIn('-> plugin', result.stdout)
 
+    def test_with_the_plugin_flag_a_third_solution_that_is_no_plugin_fails(self):
+        solutions = {'C.zip': connector(), 'F.zip': flow(), 'C2.zip': connector()}
+        self.assert_fails(self.run_on(package(solutions=solutions), 'y'),
+                          'plugin enabled but no valid plugin solution')
+
     def test_a_solution_without_solution_xml_fails(self):
         solutions = {'C.zip': connector(drop=['solution.xml']), 'F.zip': flow()}
         self.assert_fails(self.run_on(package(solutions=solutions)),
