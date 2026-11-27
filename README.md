@@ -88,3 +88,9 @@ not selectable in Power Automate and
 is committed upstream but deliberately not committed here: it is a build
 artifact, rebuilt with the Power Platform CLI (`pac`) and structurally
 checked with `scripts/validate_package.py`.
+`scripts/validate_package.test.py` tests that check against packages it
+builds; CI runs it.
+
+## License
+
+[MIT](./LICENSE)

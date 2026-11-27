@@ -9,5 +9,32 @@ permissions:
   contents: read
 
 jobs:
-  public-scrub:
-    uses: polydoc-tech/.github/.github/workflows/public-scrub.yml@main
+  # package.zip is a build artifact and is not committed, so CI tests the structure check
+  # against packages the test builds. It needs only the Python standard library, which the
+  # runner image ships.
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - run: python3 scripts/validate_package.test.py
+
+  guard:
+    uses: polydoc-tech/.github/.github/workflows/guard.yml@f965127030d3124e119f4bd012e32f0768de2441 # main
+    with:
+      source-paths: scripts/
+
+  # Branch protection requires this one check, so adding or renaming a job here needs no
+  # change there.
+  ci-ok:
+    if: ${{ always() }}
+    needs: [test]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Every job it needs passed
+        env:
+          RESULT: ${{ needs.test.result }}
+        run: test "$RESULT" = success
